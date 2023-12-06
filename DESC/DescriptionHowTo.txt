@@ -1,0 +1,73 @@
+Step1:
+1. Download Oracle Database:
+Visit the official Oracle Database download page: Oracle Database Downloads.
+Download the Oracle Database installer appropriate for your operating system.
+
+2. Install Oracle Database:
+Follow the installation instructions provided by Oracle.
+During the installation, you will set up a system user (SYS) and a regular user with administrative privileges (e.g., SYSTEM).
+
+------
+Step 2: Create Tables and Import Data
+1. Create Tables:
+Open a SQL tool (SQLcl, SQL*Plus, or SQL Developer) connected to your Oracle Database.
+Run SQL commands to create tables that match the structure of your CSV files.
+
+2. Import Data:
+Use Oracle SQL*Loader or other tools to import data from your CSV files into the tables.
+For SQL*Loader, create a control file specifying the format and mapping between CSV columns and 
+Oracle table columns.
+Example ------------
+CREATE TABLE Dataset_Purchases (
+    City VARCHAR2(50),
+    CustomerID NUMBER,
+    TotalAmount NUMBER
+    -- Add other columns as needed
+);
+
+CREATE TABLE Dataset_Cities (
+    City VARCHAR2(50),
+    Population NUMBER,
+    "Average Monthly Salary (USD)" NUMBER,
+    "Financial Situation" VARCHAR2(50)
+    -- Add other columns as needed
+);
+---------
+
+Step 3: Install Oracle SQL Client
+1. Download SQLcl or SQL Developer:
+Oracle SQLcl is a command-line interface.
+Oracle SQL Developer is a graphical tool.
+
+2. Install SQL Client:
+Follow the installation instructions provided for the chosen SQL client.
+
+------------
+
+Step 4: Connect to Oracle Database
+1. Open SQL Client:
+Launch SQLcl or SQL Developer.
+
+2.Connect to Database:
+Enter the connection details such as hostname, port, service name, username, and password.
+Connect to your Oracle Database.
+
+------------
+
+Step 5: Execute SQL Queries
+1. Open Query Editor:
+In SQLcl, use the command-line interface.
+In SQL Developer, open a SQL Worksheet.
+2. Paste and Execute Queries:
+Copy and paste your SQL queries into the query editor.
+Example
+-- Example: Percentage Buying
+SELECT
+    p.City,
+    COUNT(DISTINCT p.CustomerID) * 100.0 / c.Population AS PercentageBuying
+FROM
+    Dataset_Purchases p
+JOIN
+    Dataset_Cities c ON p.City = c.City
+GROUP BY
+    p.City, c.Population;
