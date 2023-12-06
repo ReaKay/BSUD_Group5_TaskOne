@@ -1,4 +1,4 @@
-
+-- Main MySQL Code for Task 1 ---
 
 -- Create the 'Cities' database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS Cities;
